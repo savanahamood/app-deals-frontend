@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
+import Deals from "./components/Deals/Deals";
+import LogIn from "./components/Auth/login/LogIn";
+import LoginContext from "./components/Auth/login/LogInContext";
+import { Route, Routes } from "react-router-dom";
+import DealsProvider from "./components/Deals/DealContext";
+import UsersProvider from "./components/User/UsersContext";
+import ClaimedDealsProvider from "./components/ClaimedDeals/ClaimedDealsContext";
+
+import Home from './components/Home/Home'
+import User from './components/User/User'
+import ClaimedDeals from './components/ClaimedDeals/ClaimedDeals'
+import Profile from './components/Profile/Profile'
+
+import Navbar from './components/Navbar/Navbar'
 function App() {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <LoginContext>
+        <UsersProvider>
+          <DealsProvider>
+            <ClaimedDealsProvider>
+
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LogIn />} />
+                <Route path="/users" element={<User />} />
+                <Route path="/deals" element={<Deals />} />
+                <Route path="/claimeddeal" element={<ClaimedDeals />} />
+                <Route path="/profile" element={<Profile />} />
+
+              </Routes>
+            </ClaimedDealsProvider>
+          </DealsProvider>
+        </UsersProvider>
+
+      </LoginContext>
+    </>
   );
 }
 
