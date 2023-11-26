@@ -9,7 +9,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import AddIcon from '@mui/icons-material/Add';
 import { SvgIcon, Dialog, DialogContent, Button } from "@mui/material";
 import { faAngleUp, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
-// import { faChevronUp } from "@fortawesome/free-regular-svg-icons";
+// import { faCoins } from '@fortawesome/free-solid-svg-icons'
 
 export default function Deals() {
   const claimedDealstate = useContext(ClaimedDealsContext);
@@ -24,9 +24,16 @@ export default function Deals() {
     Currency: "",
     Status: "",
   });
+  // const [totalCount, setTotalCount] = useState(0);
+  // const [totalAmount, setTotalAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  // useEffect(() => {
+  //   const totalCount = state.dealsList.length;
+  //   const totalAmount = state.dealsList.reduce((sum, deal) => sum + parseFloat(deal.Amount), 0);
+  //   setTotalCount(totalCount);
+  //   setTotalAmount(totalAmount);
+  // }, [state.dealsList]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -81,11 +88,11 @@ export default function Deals() {
     const currentIndex = statusOptions.indexOf(currentStatus);
     const nextIndex = (currentIndex + 1) % statusOptions.length;
     const nextStatus = statusOptions[nextIndex];
-  
+
     console.log(`Updating status for deal ID ${ID} from ${currentStatus} to ${nextStatus}`);
-  
+
     // Update the deal status in the database
-    await  state.updateDealsInDb(ID, nextStatus);
+    await state.updateDealsInDb(ID, nextStatus);
     await state.getFromDealsDb();
 
   };
@@ -107,6 +114,11 @@ export default function Deals() {
       <div className="dealdeal">
         <div className="dealscon">
           <h1> <span className="yellow">Deals Table</span></h1>
+          {/* <div>
+
+            <p style={{ color: "white" }}><FontAwesomeIcon icon={faCoins} />Total Count: {totalCount}</p>
+            <p style={{ color: "white" }}><FontAwesomeIcon icon={faChartPieSimpleCircleDollar} />Total Amount: {totalAmount}</p>
+          </div> */}
           <div className="helpppBtN">
             <button className="Btn hidden-element" onClick={handleOpenModal}>
               <span className="svgContainer">

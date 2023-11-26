@@ -17,7 +17,6 @@ export default function ClaimedDealsProvider(props) {
   const [isClick, setClick] = useState(false);
   const [claimeddealList, setClaimedDealList] = useState([]);
   
-  // console.log(favList,"favs from context");
   //////////////////////////////////////////////////////////////////////////////////////
   //////===================================get=========================================/////
   const getFromClaimedDealsDb = async () => {

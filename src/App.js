@@ -23,21 +23,22 @@ function App() {
 
       <LoginContext>
         <UsersProvider>
-          <DealsProvider>
-            <ClaimedDealsProvider>
 
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<LogIn />} />
-                <Route path="/users" element={<User />} />
-                <Route path="/deals" element={<Deals />} />
-                <Route path="/claimeddeal" element={<ClaimedDeals />} />
-                <Route path="/profile" element={<Profile />} />
+            <DealsProvider>
+              <ClaimedDealsProvider>
 
-              </Routes>
-            </ClaimedDealsProvider>
-          </DealsProvider>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<LogIn />} />
+                  <Route path="/users" element={<User />} />
+                  <Route path="/deals" element={<Deals />} />
+                  <Route path="/claimeddeal" element={<ClaimedDeals />} />
+                  <Route path="/profile" element={<Profile />} />
+
+                </Routes>
+              </ClaimedDealsProvider>
+            </DealsProvider>
         </UsersProvider>
 
       </LoginContext>
