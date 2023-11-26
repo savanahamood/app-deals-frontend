@@ -161,13 +161,24 @@
     background: rgba(255, 255, 255, 0.5);
 }
 
-.content p {
-    color:white;
-}
-
 @media (max-width: 600px) {
     .drop {
         width: 280px;
         height: 280px;
     }
 }}
+.file-input-label {
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+  
+  .icon-overlay {
+    font-size: 24px;
+    color: white; // Adjust the color as needed
+  }
+.content p {
+    color:white;
+}

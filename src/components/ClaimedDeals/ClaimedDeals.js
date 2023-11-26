@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import './claimeddeals.scss';
 import { LoginContext } from "../Auth/login/LogInContext";
 import { ClaimedDealsContext } from "./ClaimedDealsContext";
@@ -15,16 +15,16 @@ export default function ClaimedDeals() {
     claimedstate.deleteFromClaimedDealsDb(element)
     claimedstate.getFromClaimedDealsDb()
   }
-  const [totalCount, setTotalCount] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
+  // const [totalCount, setTotalCount] = useState(0);
+  // const [totalAmount, setTotalAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  useEffect(() => {
-    const totalCount = claimedstate.claimeddealList.length;
-    const totalAmount = claimedstate.claimeddealList.reduce((sum, deal) => sum + parseFloat(deal.Amount), 0);
-    setTotalCount(totalCount);
-    setTotalAmount(totalAmount);
-  }, [claimedstate.claimeddealList]);
+  // useEffect(() => {
+  //   const totalCount = claimedstate.claimeddealList.length;
+  //   const totalAmount = claimedstate.claimeddealList.reduce((sum, deal) => sum + parseFloat(deal.Amount), 0);
+  //   setTotalCount(totalCount);
+  //   setTotalAmount(totalAmount);
+  // }, [claimedstate.claimeddealList]);
 
   const totalPages = Math.ceil(claimedstate.claimeddealList.length / itemsPerPage);
   const pageButtons = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -32,17 +32,44 @@ export default function ClaimedDeals() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  // useEffect(() => {
+  //   let isMounted = true; // Flag to track whether the component is mounted
 
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await claimedstate.getOneUserDb();
+
+  //       if (isMounted) {
+  //         // Check if the component is still mounted before updating state
+  //         console.log('userimage', claimedstate.claimeddealList);
+  //         console.log('dddddddd', response)
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   if (LoginState.user && LoginState.user.id) {
+  //     fetchData();
+  //   } else {
+  //     console.log('User id is not available');
+  //   }
+
+  //   // Cleanup function to set isMounted to false when the component unmounts
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [LoginState.user]);
   return (
     <>
       <div className="dealdeal">
         <div className="dealscon">
           <h1> <span className="yellow">Claimed Deals Table</span></h1>
-          <div>
+          {/* <div>
 
             <p style={{ color: "white" }}>Total Count: {totalCount}</p>
             <p style={{ color: "white" }}>Total Amount: {totalAmount}</p>
-          </div>
+          </div> */}
 
   
           <table className="container">

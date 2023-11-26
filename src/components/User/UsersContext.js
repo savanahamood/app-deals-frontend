@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import axios from "axios";
 import cookie from "react-cookies";
 import superagent from "superagent";
 export const UsersContext = React.createContext();
+import  {LoginContext}  from "../Auth/login/LogInContext";
 
 export default function UsersList(props) {
+  const LoginState = useContext(LoginContext);
+
   const [usersList, setUsersList] = useState([]);
-  console.log(usersList)
+
   //////////////////////////////////////////////////////////////////////////////////////
   //////===================================get=========================================/////
   const getFromUsersDb = async () => {
     try {
       const response = await superagent
-        .get(`http://localhost:3001/users`)
-        .set("authorization", `Bearer ${cookie.load("auth")}`);
+      .get(`http://localhost:3001/users`)
+      .set("authorization", `Bearer ${cookie.load("auth")}`);
       const items = response.body;
       setUsersList(items);
     } catch (error) {
@@ -21,6 +24,30 @@ export default function UsersList(props) {
     }
   };
   
+  console.log("5454545",LoginState.user.id)
+  const getOneUserDb = async () => {
+    const userId=LoginState.user.id
+    console.log(userId,"userIdIn")
+    try {
+      const response = await superagent
+        .get(`http://localhost:3001/users/${userId}`)
+        .set("authorization", `Bearer ${cookie.load("auth")}`);
+        if (response.ok) {
+          const items = response.body;
+        // console.log(items.claimed,"items.claimed")
+        // console.log(response.body,'response.body');
+        
+        setUsersList(items);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+
+
   //////////////////////////////////////////////////////////////////////////////////////
   //////===================================post=========================================/////
 
@@ -116,6 +143,9 @@ export default function UsersList(props) {
     }
   };
   
+
+  
+
  
   useEffect(() => {
     getFromUsersDb();
@@ -123,7 +153,9 @@ export default function UsersList(props) {
 
   const state = {
     usersList: usersList,
+    setUsersList: setUsersList,
     getFromUsersDb,
+    getOneUserDb,
     AddToUsersDb,
     updateUsersInDb,
     deleteUsersInDb,
